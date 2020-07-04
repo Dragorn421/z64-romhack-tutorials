@@ -46,3 +46,19 @@ Result:
 With backface culling enabled in Blender and after deleting the top face:
 
 ![easier to see result of flip normals](https://421.es/doyu/1jmowv)
+
+## Making both front and back sides visible
+
+For geometry that is actually supposed to be viewed from both sides (like a wall), backface culling can be disabled.
+
+### Method 1: in the SharpOcarina interface
+
+There is a `Backface Culling` checkbox that can be unticked for every mesh to disable backface culling for.
+
+![backface culling checkbox in SharpOcarina](https://421.es/doyu/1jmthd)
+
+### Method 2: in Blender with SharpOcarina tags
+
+See [SharpOcarina tags](sharpocarina_tags.md) for an explanation of tags.
+
+The `BackfaceCulling` tag can be used to disable backface culling on the desired objects (yes, the tag name is counter-intuitive).
