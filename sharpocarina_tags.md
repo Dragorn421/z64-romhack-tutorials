@@ -30,3 +30,25 @@ Tags can also define values, not only set a property like "is hookshot-able". Fo
 ```<!-- Flag Key="#Room" usage: #Room<number>, where <number> is the room number, this flag is only used if you press "Add multiple rooms"-->```
 
 This means you can define what meshs are part of which room from Blender, by appending eg `#Room0` to the name of every mesh that should be in the first room.
+
+## Tags priority
+
+Mesh tags (the ones used for model settings, for displaying) are only applied on import or reload in SharpOcarina.
+
+Collision tags are always enforced when exporting the map.
+
+<details>
+<summary>
+Source
+
+([Hylian Modding](https://discordapp.com/channels/388361645073629187/451783162859749386/728960330679451718))
+</summary>
+
+```
+Nokaubure 2020-07-04T13:08:00Z
+collision tags are absolute and take priority
+but mesh tags all they do is checking the necessary checkboxes when you import the room or reload
+so they're optional
+with the exception of #Room and #NoMesh ofc
+```
+</details>
