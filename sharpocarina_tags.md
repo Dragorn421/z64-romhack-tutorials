@@ -1,0 +1,32 @@
+# SharpOcarina tags
+
+Tags are used to define some display and collision properties from Blender.
+
+## `ModelFlags.xml`
+
+From the folder where the `SharpOcarina.exe` executable is, can be found the file located at `XML/OOT/ModelFlags.xml`.
+
+This file describes what tags can be used in Blender to directly set some model and collision settings in SharpOcarina, without using the interface. (tags may also be called flags)
+
+## Adding tags
+
+A `TagName` tag is added to an object in Blender by adding `#TagName` to its name. (names can be at most 63 characters long, this can be limiting)
+
+<details>
+<summary>Click here for an example</summary>
+This adds `BackfaceCulling` and `Camera0` tags to the Cube, and the `Camera1` tag to the Plane:
+
+![example tags in Blender (2.79)](https://421.es/doyu/1jmulc)
+</details>
+
+## Examples
+
+In the interface, the "model settings" are located under `Group Settings` in the `Rooms` tab, and the "collision settings" are under `Polygon Types` in the `Collision & Exits` tab.
+
+For example, in the collision settings can be found a `Hookshot-able` checkbox, the corresponding tag as can be found in `ModelFlags.xml` is `Hookshot`.
+
+Tags can also define values, not only set a property like "is hookshot-able". For example, consider the following line from `ModelFlags.xml`:
+
+```<!-- Flag Key="#Room" usage: #Room<number>, where <number> is the room number, this flag is only used if you press "Add multiple rooms"-->```
+
+This means you can define what meshs are part of which room from Blender, by appending eg `#Room0` to the name of every mesh that should be in the first room.
