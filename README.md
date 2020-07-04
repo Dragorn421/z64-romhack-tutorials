@@ -7,3 +7,5 @@ A collection of simple tutorials for common issues encountered when romhacking O
 [GitHub Flavoured Markdown cheatsheet](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf)
 
 [In-browser markdown editor](https://jbt.github.io/markdown-editor/)
+
+For dating a source, use the [ISO 8601 date format](https://en.wikipedia.org/wiki/ISO_8601) (preferably UTC `yyyy-MM-ddThh:mm:ssZ`)
