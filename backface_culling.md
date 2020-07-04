@@ -5,6 +5,7 @@ Blender screenshots made with Blender 2.79
  - [Enable backface culling in Blender](#enable-backface-culling-in-blender)
  - [Show face normals in Blender](#show-face-normals-in-blender)
  - [Flipping normals in Blender](#flipping-normals-in-blender)
+ - [Making both front and back sides visible](#making-both-front-and-back-sides-visible)
 
 # Backface Culling
 
