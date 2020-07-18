@@ -32,6 +32,12 @@ What defines which side of a face is "back" or "front" is face normals, those ca
 
 ![show normals in Blender 2.79](https://421.es/doyu/1jmota)
 
+<details>
+<summary>In Blender 2.82</summary>
+ 
+![show normals in Blender 2.82](https://421.es/doyu/1kdad1)
+</details>
+
 ## Flipping normals in Blender
 
 To change which direction normals are facing, select the faces and use the flip normals operator.
