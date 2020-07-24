@@ -52,3 +52,23 @@ so they're optional
 with the exception of #Room and #NoMesh ofc
 ```
 </details>
+
+## Texture Tags
+
+Tags can be added per-texture (`#ClampX`, `#ClampY`, `#MirrorX`, `#MirrorY`) by adding them to the image file name, like `texture#ClampX.png`.
+
+<details>
+<summary>
+Source
+
+([Hylian Modding](https://discordapp.com/channels/388361645073629187/451783162859749386/736185344004980816))
+</summary>
+
+```
+2020-07-24T13:37:00Z
+Dragorn421: could you confirm this (where should #ClampXY #MirrorXY go)
+Nokaubure: inside texture filename
+Dragorn421: do you allow texture#ClampX.png or do you require texture.png#ClampX
+Nokaubure: the first
+```
+</details>
