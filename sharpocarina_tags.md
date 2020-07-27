@@ -14,6 +14,7 @@ A `TagName` tag is added to an object in Blender by adding `#TagName` to its nam
 
 <details>
 <summary>Click here for an example</summary>
+
 This adds `BackfaceCulling` and `Camera0` tags to the Cube, and the `Camera1` tag to the Plane:
 
 ![example tags in Blender (2.79)](https://421.es/doyu/1jmulc)
