@@ -22,6 +22,9 @@ Blender:
 ![How it looks in Blender (2.79)](https://421.es/doyu/1jmsin)
 </details>
 
+[Video demonstrating what this file explains (Blender 2.79)](
+https://cdn.discordapp.com/attachments/451783162859749386/737187098137722940/add_walls.webm)
+
 ## Enable backface culling in Blender
 
 ![backface culling Blender 2.79 option](https://421.es/doyu/1jmoqx)
