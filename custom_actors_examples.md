@@ -38,7 +38,7 @@ Keep in mind that z64ovl names (such as function, structs or struct members name
 
 ## CrookedPoe
 
-[C code (github)](https://github.com/CrookedPoe/z64-rw/tree/master/oot_mq_dbg) (rewrites of vanilla actors)
+[C code (github)](https://github.com/CrookedPoe/z64-rw/) (rewrites of vanilla actors)
 
 ## The Decompilation Project
 
