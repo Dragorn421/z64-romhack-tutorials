@@ -16,11 +16,13 @@ For **multi-room scenes**: keep in mind two rooms may be loaded at the same time
 
 It is unlikely that you get limited by ROM/RAM in how much tris to put into a map.
 
+If using decomp, you can edit collision parameters in code (see `BgCheck_Allocate` in z_bgcheck.c) to match your memory/performance needs.
+
 ## For actors
 
 Again, the only limit for displayed tris by an actor is **lag**, which again makes it **depend on context**.
 
-However, there is a limit for collision tris (`dynapoly`) of **256 tris for dynapoly collision**.
+However, there is a limit for collision tris (`dynapoly`) of **512 tris, 512 vertices for dynapoly collision** (or more rarely 256, see decomp for details).
 
 The memory size available for loaded objects is roughly **1 MB** and may become a constraint for putting a lot of different actors in a scene.
 
@@ -56,15 +58,4 @@ Nokaubure: 36 non-optimized collision, use for houses only
 ```
 </details>
 
-<details>
-<summary>
-256 tri dynapoly limit
-
-([Hylian Modding](https://discordapp.com/channels/388361645073629187/547544402428428315/720984837946867742))
-</summary>
-
-```
-2020-06-12T12:56:00Z
-Nokaubure: but the only way to get rid of the launcher is to have enough documentation (with decomp) to get rid of the 256 dynapoly limit
-```
-</details>
+[z_bgcheck.c in decomp](https://github.com/zeldaret/oot/blob/5c4fdb706b51350c6de10e0a20c2e01476c98e52/src/code/z_bgcheck.c#L1491) (thanks mzx for decompiling z_bgcheck and noticing this file could make use of it)
