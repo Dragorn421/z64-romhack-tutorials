@@ -7,6 +7,4 @@ typedef struct CustomActor {
     Actor actor;
 } CustomActor;
 
-extern const ActorInit CustomActor_InitVars;
-
 #endif

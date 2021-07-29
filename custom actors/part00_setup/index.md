@@ -147,6 +147,8 @@ To avoid having to check that checkbox again each time you run CAT, you can clic
 
 Download [actor.c](../custom_actor_base/actor.c) and [actor.h](../custom_actor_base/actor.h) (click `Raw` and save). These two files need to be in the same folder.
 
+If you aren't using the OoT MQ debug ROM but the OoT 1.0 ROM instead, open `actor.h` and change `oot_debug` in `#include "z64hdr/oot_debug.h"` to `oot_10`.
+
 Open the ROM you want to inject the custom actor into with CAT (CustomActorToolkit):
 
 ![CAT load rom menu item](images/cat_load_rom_menu_item.png)
@@ -195,6 +197,8 @@ Remember that in CAT the actor id (`Actor number`) was set to `1`, so we need to
 I recommend putting the actor towards the center and Link to the side, it will work out better with what's next in this tutorial.
 
 Inject the scene into the ROM, run the game, and load the scene you just injected.
+
+You do *not* need to inject the scene each time you edit, compile and inject the actor. You only need to inject the scene once. You also don't need to inject the actor again if you just want to edit the scene.
 
 If everything works, the game should not crash and display a message at the top of the screen:
 
