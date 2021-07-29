@@ -72,7 +72,7 @@ These are [forward declarations](https://en.wikipedia.org/wiki/Forward_declarati
 
 #### Init vars
 
-"Init vars", as they are referred to, ("initialization variables") hold generic settings used when spawning an actor, for xample when a scene/room loads.
+"Init vars", as they are referred to, ("initialization variables") hold generic settings used when spawning an actor, for example when a scene/room loads.
 
 ```c
 const ActorInit initvars = {
