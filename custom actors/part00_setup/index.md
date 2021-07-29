@@ -145,7 +145,7 @@ To avoid having to check that checkbox again each time you run CAT, you can clic
 
 ## Inject a custom actor into the ROM
 
-Download [actor.c](../custom_actor_base/actor.c) and [actor.h](../custom_actor_base/actor.h). These two files need to be in the same folder.
+Download [actor.c](../custom_actor_base/actor.c) and [actor.h](../custom_actor_base/actor.h) (click `Raw` and save). These two files need to be in the same folder.
 
 Open the ROM you want to inject the custom actor into with CAT (CustomActorToolkit):
 
