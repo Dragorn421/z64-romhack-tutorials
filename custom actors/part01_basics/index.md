@@ -15,9 +15,7 @@ Open [actor.h](../custom_actor_base/actor.h).
 <details>
 
 <summary>
-
 The first two lines (`#ifndef ...`, `#define ...`) and the last line (`#endif`) form an include guard.
-
 </summary>
 
 The first two lines
