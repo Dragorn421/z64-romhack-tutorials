@@ -62,7 +62,7 @@ md5 sum | Common filename | Notes
 
 If your MQ debug ROM's md5 sum isn't listed please contact me (for example, on Discord)
 
-Again, if your ROM has the md5 `230f62c994ff072a1434df6e65e2dbe0`, find another one.
+Again, if your ROM has the md5 `230f62c994ff072a1434df6e65e2dbe0`, find another one. The other ROMs are fine.
 
 
 ## Custom Actor Toolkit
@@ -191,6 +191,8 @@ I will be using [SharpOcarina](https://hylianmodding.com/?p=240) to add the acto
 Remember that in CAT the actor id (`Actor number`) was set to `1`, so we need to set the actor id to `1` in SharpOcarina:
 
 ![SharpOcarina test scene with actor id 1](images/sharpocarina_test_scene_actorid.png)
+
+I recommend putting the actor towards the center and Link to the side, it will work out better with what's next in this tutorial.
 
 Inject the scene into the ROM, run the game, and load the scene you just injected.
 
