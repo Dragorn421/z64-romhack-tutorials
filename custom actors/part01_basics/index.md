@@ -202,11 +202,11 @@ void CustomActor_Draw(CustomActor* this, GlobalContext* globalCtx) {
     GfxPrint_Init(&printer);
     GfxPrint_Open(&printer, gfx);
 
-	// the actually modified lines v
-	GfxPrint_SetColor(&printer, 0, 255, 0, 255);
-	GfxPrint_SetPos(&printer, 1, 20);
-	GfxPrint_Printf(&printer, "Link is %f units away horizontally", this->actor.xzDistToPlayer);
-	// the actually modified lines ^
+    // the actually modified lines v
+    GfxPrint_SetColor(&printer, 0, 255, 0, 255);
+    GfxPrint_SetPos(&printer, 1, 20);
+    GfxPrint_Printf(&printer, "Link is %f units away horizontally", this->actor.xzDistToPlayer);
+    // the actually modified lines ^
 
     gfx = GfxPrint_Close(&printer);
     GfxPrint_Destroy(&printer);
@@ -237,10 +237,10 @@ Click to reveal a solution
 
 ```c
 void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
-	// kill Link if he gets 100 units or closer
-	if (this->actor.xzDistToPlayer < 100.0f) {
-		gSaveContext.health = 0;
-	}
+    // kill Link if he gets 100 units or closer
+    if (this->actor.xzDistToPlayer < 100.0f) {
+        gSaveContext.health = 0;
+    }
 }
 ```
 
@@ -276,17 +276,17 @@ Click to reveal a solution
 
 ```c
 void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
-	// damage Link if he gets 100 units or closer
-	if (this->actor.xzDistToPlayer < 100.0f) {
-		/*
-		 * the next condition prevents setting a negative health value.
-		 * negative health may be fine but it is good practice to avoid weird scenarios,
-		 * you never know when it may matter and cause a crash!
-		 */
-		if (gSaveContext.health > 0) {
-			gSaveContext.health--;
-		}
-	}
+    // damage Link if he gets 100 units or closer
+    if (this->actor.xzDistToPlayer < 100.0f) {
+        /*
+         * the next condition prevents setting a negative health value.
+         * negative health may be fine but it is good practice to avoid weird scenarios,
+         * you never know when it may matter and cause a crash!
+         */
+        if (gSaveContext.health > 0) {
+            gSaveContext.health--;
+        }
+    }
 }
 ```
 
@@ -298,7 +298,7 @@ I would instead like the actor to damage Link by one full heart (at once) when h
 
 So we need the actor to "remember" not to damage Link for some time after damaging him. The actor instance (the `CustomActor* this` argument) is the right place to store that kind of data.
 
-Open `actor.h`, where the definition of the `CustomActor` struct is. ([see above](#CustomActor-struct))
+Open `actor.h`, where the definition of the `CustomActor` struct is. ([see above](#customactor-struct))
 
 The struct definition is minimal at the moment:
 
@@ -317,7 +317,7 @@ With all of that in mind, let's add a member *after* the `actor` member, with an
 ```c
 typedef struct CustomActor {
     Actor actor;
-	s32 dontHitPlayerTimer; // when above zero, do not damage Link
+    s32 dontHitPlayerTimer; // when above zero, do not damage Link
 } CustomActor;
 ```
 
@@ -325,21 +325,21 @@ We can now make use of this new member in our code. Back to `CustomActor_Update`
 
 ```c
 void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
-	// tick down to 0
-	if (this->dontHitPlayerTimer > 0) {
-		dontHitPlayerTimer--;
-	}
-	// damage Link if he gets 100 units or closer
-	if (this->actor.xzDistToPlayer < 100.0f) {
-		if (this->dontHitPlayerTimer == 0) {
-			if (gSaveContext.health > 0) {
-				// damage by a full heart
-				gSaveContext.health -= 16;
-				// do not damage Link again for 60 frames (3 seconds)
-				this->dontHitPlayerTimer = 60; 
-			}
-		}
-	}
+    // tick down to 0
+    if (this->dontHitPlayerTimer > 0) {
+        dontHitPlayerTimer--;
+    }
+    // damage Link if he gets 100 units or closer
+    if (this->actor.xzDistToPlayer < 100.0f) {
+        if (this->dontHitPlayerTimer == 0) {
+            if (gSaveContext.health > 0) {
+                // damage by a full heart
+                gSaveContext.health -= 16;
+                // do not damage Link again for 60 frames (3 seconds)
+                this->dontHitPlayerTimer = 60; 
+            }
+        }
+    }
 }
 ```
 
