@@ -6,7 +6,7 @@
 
 * Have at least a very basic idea of how OoT's engine works
 
-Basically, having watched [Nokaubure's SharpOcarina tutorial](https://www.youtube.com/playlist?list=PLHifXa1TzdydElLH_cSvnWIemkqJvBLDZ) parts 1 to 4.
+Having watched [Nokaubure's SharpOcarina tutorial](https://www.youtube.com/playlist?list=PLHifXa1TzdydElLH_cSvnWIemkqJvBLDZ) parts 1 to 4 is probably a good introduction.
 
 I recommend using recent Blender versions, like Blender 2.93. [A nice tutorial for Blender 2.80](https://www.youtube.com/playlist?list=PLa1F2ddGya_-UvuAqHAksYnB0qL9yWDO6) (still relevant for Blender 2.93).
 

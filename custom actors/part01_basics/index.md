@@ -49,7 +49,7 @@ typedef struct CustomActor {
 } CustomActor;
 ```
 
-A `struct` (structure) defines how to use some memory.
+A [`struct`](https://en.wikipedia.org/wiki/Struct_(C_programming_language)) (structure) defines how to use some memory.
 
 Each actor has its own struct, but they all share the same base struct, `Actor`, which holds generic actor data such as actor id, position, speed...
 
@@ -69,6 +69,8 @@ void CustomActor_Draw(Actor* thisx, GlobalContext* globalCtx);
 ```
 
 These are [forward declarations](https://en.wikipedia.org/wiki/Forward_declaration). They indicate that the functions exist and will be defined later.
+
+Explaining what a [function](https://en.wikipedia.org/wiki/Subroutine) is, is too long for this tutorial.
 
 #### Init vars
 
@@ -184,12 +186,165 @@ As training I would now like you to print a message, in green and near the botto
 
 The horizontal distance to Link is stored in `this->actor.xzDistToPlayer`. It is a floating point value, so use `%f`. Have fun :)
 
-# TODO
+<details>
+
+<summary>
+Click to reveal a solution
+</summary>
+
+```c
+void CustomActor_Draw(CustomActor* this, GlobalContext* globalCtx) {
+    GfxPrint printer;
+    Gfx* gfx = globalCtx->state.gfxCtx->polyOpa.p + 1;
+
+    gSPDisplayList(globalCtx->state.gfxCtx->overlay.p++, gfx);
+
+    GfxPrint_Init(&printer);
+    GfxPrint_Open(&printer, gfx);
+
+	// the actually modified lines v
+	GfxPrint_SetColor(&printer, 0, 255, 0, 255);
+	GfxPrint_SetPos(&printer, 1, 20);
+	GfxPrint_Printf(&printer, "Link is %f units away horizontally", this->actor.xzDistToPlayer);
+	// the actually modified lines ^
+
+    gfx = GfxPrint_Close(&printer);
+    GfxPrint_Destroy(&printer);
+
+    gSPEndDisplayList(gfx++);
+    gSPBranchList(globalCtx->state.gfxCtx->polyOpa.p, gfx);
+    globalCtx->state.gfxCtx->polyOpa.p = gfx;
+}
+```
+
+</details>
+
+## The start of something
+
+We will now make the actor kill Link when he gets too close.
+
+With the distance to Link shown on screen, you can decide of a good range to use. Try not killing Link as soon as he spawns in!
+
+Since this isn't about drawing the actor, but about its logic and how it interacts with something else, we will put the relevant code in the update function `CustomActor_Update`.
+
+To kill Link, set his health to 0. Link's health is stored in `gSaveContext.health`.
 
 <details>
 
-    GfxPrint_SetColor(&printer, 0, 255, 0, 255);
-    GfxPrint_SetPos(&printer, 1, 20);
-    GfxPrint_Printf(&printer, "Link is %f units away horizontally", this->actor.xzDistToPlayer);
+<summary>
+Click to reveal a solution
+</summary>
+
+```c
+void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
+	// kill Link if he gets 100 units or closer
+	if (this->actor.xzDistToPlayer < 100.0f) {
+		gSaveContext.health = 0;
+	}
+}
+```
+
+I will write floats (floating point values) as `100.0f`, but it is fine to just write `100` or `100.0`.
+
+<details>
+
+<summary>
+The difference is the type of the value.
+</summary>
+
+- `100`: integer (`s32`)
+- `100.0f`: float (`f32`, simple-precision floating point value)
+- `100.0`: double (`f64`, double-precision floating point value)
+
+When comparing two values, they need to be converted to the same type, so using a `f32` value (`100.0f`) to compare against another `f32` value (`this->actor.xzDistToPlayer`) does not require a conversion. That means less instructions in the compiler output.
 
 </details>
+
+</details>
+
+Is Link dying as expected? Now, instead of killing him immediately, we will only damage him if he gets too close.
+
+Link's health is stored in `gSaveContext.health`, in sixteenth of hearts. That means `gSaveContext.health = 16;` sets Link's health to one full heart.
+
+For now, let's make Link loose 1/16th heart per frame he is too close.
+
+<details>
+
+<summary>
+Click to reveal a solution
+</summary>
+
+```c
+void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
+	// damage Link if he gets 100 units or closer
+	if (this->actor.xzDistToPlayer < 100.0f) {
+		/*
+		 * the next condition prevents setting a negative health value.
+		 * negative health may be fine but it is good practice to avoid weird scenarios,
+		 * you never know when it may matter and cause a crash!
+		 */
+		if (gSaveContext.health > 0) {
+			gSaveContext.health--;
+		}
+	}
+}
+```
+
+<details>
+
+The game runs at 20 [fps](https://en.wikipedia.org/wiki/Frame_rate) (frames per second) and the game keeps track of health in 1/16ths of hearts, so Link is damaged at a rate of around one heart every second, but it looks like his life is being drained.
+
+I would instead like the actor to damage Link by one full heart (at once) when he gets too close, but only once every few seconds.
+
+So we need the actor to "remember" not to damage Link for some time after damaging him. The actor instance (the `CustomActor* this` argument) is the right place to store that kind of data.
+
+Open `actor.h`, where the definition of the `CustomActor` struct is. ([see above](#CustomActor-struct))
+
+The struct definition is minimal at the moment:
+
+```c
+typedef struct CustomActor {
+    Actor actor;
+} CustomActor;
+```
+
+**The `Actor actor;` member must always be the first (top-most) member in the struct definition.** If it isn't, the game may (not immediately) crash and your actor is more than likely to not behave as expected.
+
+There are several ways to implement the wait-after-damaging-Link we want to achieve, I will be using a timer that ticks down to 0.
+
+With all of that in mind, let's add a member *after* the `actor` member, with an appropriate name.
+
+```c
+typedef struct CustomActor {
+    Actor actor;
+	s32 dontHitPlayerTimer; // when above zero, do not damage Link
+} CustomActor;
+```
+
+We can now make use of this new member in our code. Back to `CustomActor_Update` in `actor.c`:
+
+```c
+void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
+	// tick down to 0
+	if (this->dontHitPlayerTimer > 0) {
+		dontHitPlayerTimer--;
+	}
+	// damage Link if he gets 100 units or closer
+	if (this->actor.xzDistToPlayer < 100.0f) {
+		if (this->dontHitPlayerTimer == 0) {
+			if (gSaveContext.health > 0) {
+				// damage by a full heart
+				gSaveContext.health -= 16;
+				// do not damage Link again for 60 frames (3 seconds)
+				this->dontHitPlayerTimer = 60; 
+			}
+		}
+	}
+}
+```
+
+Link is now damaged by a full heart every three seconds when he is too close to the actor. Pretty cool, right?
+
+To be fancier, you could change the text printed by `CustomActor_Draw`, for example draw red text with the remaining time before damaging Link again when Link is too close (use `%d` for integers like `this->dontHitPlayerTimer`), and green text with Link's distance when he is far enough.
+
+Now that we wrote the basics of the actor's logic, it is time to worry about how it looks and make it actually appear in game, instead of just text on the screen.

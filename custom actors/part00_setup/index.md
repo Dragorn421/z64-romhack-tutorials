@@ -204,6 +204,6 @@ If everything works, the game should not crash and display a message at the top 
 
 ![In-game custom actor displays text](images/ingame_basic_actor_screentext.png)
 
-If it worked, congratulations! You are ready to start coding custom actors.
-
 If it didn't work, try going over the setup process again, and ask for help if needed.
+
+If it worked, congratulations! You are ready to start coding custom actors.
