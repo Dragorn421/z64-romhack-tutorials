@@ -290,7 +290,7 @@ void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
 }
 ```
 
-<details>
+</details>
 
 The game runs at 20 [fps](https://en.wikipedia.org/wiki/Frame_rate) (frames per second) and the game keeps track of health in 1/16ths of hearts, so Link is damaged at a rate of around one heart every second, but it looks like his life is being drained.
 
