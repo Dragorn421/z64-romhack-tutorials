@@ -1,7 +1,7 @@
 #ifndef _Z_CUSTOMACTOR_H_
 #define _Z_CUSTOMACTOR_H_
 
-#include "z64hdr/oot_debug.h"
+#include "oot_mq_debug/z64hdr.h"
 
 typedef struct CustomActor {
     Actor actor;
