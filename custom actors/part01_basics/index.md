@@ -327,7 +327,7 @@ We can now make use of this new member in our code. Back to `CustomActor_Update`
 void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
     // tick down to 0
     if (this->dontHitPlayerTimer > 0) {
-        dontHitPlayerTimer--;
+        this->dontHitPlayerTimer--;
     }
     // damage Link if he gets 100 units or closer
     if (this->actor.xzDistToPlayer < 100.0f) {
