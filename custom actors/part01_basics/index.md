@@ -39,7 +39,7 @@ Just don't touch them, and add anything you want to add in `actor.h` between tho
 
 #### Include z64hdr
 
-Like `#include "actor.h"` did in `actor.c`, here in `actor.h` the line `#include "z64hdr/oot_debug.h"` brings z64hdr definitions to `actor.h`, and to `actor.c`.
+Like `#include "actor.h"` did in `actor.c`, here in `actor.h` the line `#include "oot_mq_debug/z64hdr.h"` brings z64hdr definitions to `actor.h`, and to `actor.c`.
 
 #### CustomActor struct
 

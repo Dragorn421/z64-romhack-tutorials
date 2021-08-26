@@ -147,7 +147,7 @@ To avoid having to check that checkbox again each time you run CAT, you can clic
 
 Download [actor.c](../custom_actor_base/actor.c) and [actor.h](../custom_actor_base/actor.h) (click `Raw` and save). These two files need to be in the same folder.
 
-If you aren't using the OoT MQ debug ROM but the OoT 1.0 ROM instead, open `actor.h` and change `oot_debug` in `#include "z64hdr/oot_debug.h"` to `oot_10`.
+If you aren't using the OoT MQ debug ROM but the OoT 1.0 ROM instead, open `actor.h` and change `oot_mq_debug` in `#include "oot_mq_debug/z64hdr.h"` to `oot_u10`.
 
 Open the ROM you want to inject the custom actor into with CAT (CustomActorToolkit):
 
