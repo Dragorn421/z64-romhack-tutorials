@@ -23,9 +23,7 @@ We need to create the object file. There are several tools to do it, we will use
 <details>
 
 <summary>
-
 Make sure your model in Blender is a single mesh.
-
 </summary>
 
 Good:
@@ -59,9 +57,7 @@ If you modeled your cannon really big in Blender, you may end up with a scale li
 <details>
 
 <summary>
-
 Now, multiply that scale by 100.
-
 </summary>
 
 The reason is, coordinates in object files are stored as integers, so to avoid loosing precision (for example `x=1.2` becoming `x=1`) the models are usually stored with a big scale in the object file, and scaled down when drawn. The default scale for scaling down is `1/100`, which is why I'm making you multiply the scale by 100.
@@ -70,7 +66,7 @@ The reason is, coordinates in object files are stored as integers, so to avoid l
 
 For me the result is `15*100 = 1500` which is above the maximum SharpOcarina allows (`1000`), so instead I'm going to scale my model in Blender by `15`, export to `.obj` again and set the scale in SharpOcarina to `100`.
 
-![My cannon model after scaling by 15 in Blender and setting the scale to 100 in SharpOcarina](sharpocarina_cannon_rescaled_with_100_scale.png)
+![My cannon model after scaling by 15 in Blender and setting the scale to 100 in SharpOcarina](images/sharpocarina_cannon_rescaled_with_100_scale.png)
 
 It's time to export the model to a zobj (object file), click `Extra > Related to external files / zobj exporting > Export current room as .zobj > Bank 0x06 (most zobj)`:
 
@@ -229,8 +225,8 @@ void CustomActor_Draw(CustomActor* this, GlobalContext* globalCtx) {
     ...
     globalCtx->state.gfxCtx->polyOpa.p = gfx;
 
-	// if you don't remove the text drawing code, put this at the end!
-	Gfx_DrawDListOpa(globalCtx, 0x060013E0);
+    // if you don't remove the text drawing code, put this at the end!
+    Gfx_DrawDListOpa(globalCtx, 0x060013E0);
 }
 ```
 
@@ -251,9 +247,9 @@ Now that our actor looks like a cannon, let's make it behave like a cannon attac
 I bumped up the distance at which Link takes damage to 300 units, and added this to the update function:
 
 ```c
-// face Link if he is closer than 400 units away
+// face Link if he is less than 400 units away
 if (this->actor.xzDistToPlayer < 400.0f) {
-	this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
+    this->actor.shape.rot.y = this->actor.yawTowardsPlayer;
 }
 ```
 
@@ -321,22 +317,22 @@ void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
     if (this->dontHitPlayerTimer > 0) {
         this->dontHitPlayerTimer--;
     }
-	
+    
     // damage Link if he gets 300 units or closer
     if (this->actor.xzDistToPlayer < 300.0f) {
-		// fuse sparkle effect
-		Vec3f effPos = this->actor.world.pos;
-		Vec3f effVelocity = { 0.0f, 5.0f, 0.0f };
-		Vec3f effAccel = { 0.0f, -0.5f, 0.0f };
-		effPos.x += 8.0f;
-		effPos.y += 75.0f;
-		EffectSsGSpk_SpawnFuse(globalCtx, &this->actor, &effPos, &effVelocity, &effAccel);
-		
-		Audio_PlayActorSound2(&this->actor, NA_SE_IT_BOMB_IGNIT - SFX_FLAG);
-		
+        // fuse sparkle effect
+        Vec3f effPos = this->actor.world.pos;
+        Vec3f effVelocity = { 0.0f, 5.0f, 0.0f };
+        Vec3f effAccel = { 0.0f, -0.5f, 0.0f };
+        effPos.x += 8.0f;
+        effPos.y += 75.0f;
+        EffectSsGSpk_SpawnFuse(globalCtx, &this->actor, &effPos, &effVelocity, &effAccel);
+        
+        Audio_PlayActorSound2(&this->actor, NA_SE_IT_BOMB_IGNIT - SFX_FLAG);
+        
         if (this->dontHitPlayerTimer == 0) {
             if (gSaveContext.health > 0) {
-				Audio_PlayActorSound2(&this->actor, NA_SE_IT_BOMB_EXPLOSION);
+                Audio_PlayActorSound2(&this->actor, NA_SE_IT_BOMB_EXPLOSION);
                 // damage by a full heart
                 gSaveContext.health -= 16;
                 // do not damage Link again for 60 frames (3 seconds)
@@ -344,12 +340,12 @@ void CustomActor_Update(CustomActor* this, GlobalContext* globalCtx) {
             }
         }
     }
-	
-	// rotate towards Link if he is closer than 400 units
+    
+    // rotate towards Link if he is closer than 400 units
     if (this->actor.xzDistToPlayer < 400.0f) {
-		Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer + 0x4000, 2, 0x600, 0x100);
-	}
+        Math_SmoothStepToS(&this->actor.shape.rot.y, this->actor.yawTowardsPlayer + 0x4000, 2, 0x600, 0x100);
+    }
 }
 ```
 
-[Demo video](cannon_graphics_demo.webm)
+Demo video: [YouTube (streaming)](https://www.youtube.com/watch?v=R3FuNsudgsY) [GitHub (download)](cannon_graphics_demo.webm)
