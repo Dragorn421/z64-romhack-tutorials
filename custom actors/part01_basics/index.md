@@ -1,5 +1,7 @@
 # Basics
 
+We will go over how the custom actor we added in the previous part works, and tweak it a bit.
+
 ## Actor Layout
 
 Open the [actor.c](../custom_actor_base/actor.c) file you just downloaded.

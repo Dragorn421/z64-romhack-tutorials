@@ -1,5 +1,7 @@
 # Setup
 
+We will set up tools and add a basic custom actor I wrote to the game, to make sure everything works.
+
 ## Your base ROM (optional)
 
 You can probably skip this part if using a OoT 1.0 ROM.
@@ -86,6 +88,8 @@ Direct download link for CAT 0.53: https://mega.nz/file/2Io2zboK#OzJDh9V6ownVfhC
 Extract the ZIP to some empty folder.
 
 Run the `CustomActorsToolkit` executable. If a new version is available, CAT will ask if it should update. Say "Yes" and wait for CAT to restart on its own. (latest version is 0.53 at the time of writing this)
+
+![CAT asking if it should update](images/cat_update_dialog.png)
 
 
 ## z64hdr
