@@ -1,6 +1,10 @@
 # Romhacking-related tutorials for Zelda64 games
 
-A collection of simple tutorials for common issues encountered when romhacking Ocarina of Time (or Majora's Mask) for the Nintendo64.
+A collection of tutorials and explanations, of various levels, for understanding and modding Ocarina of Time (or Majora's Mask) for the Nintendo64.
+
+[Custom Actors tutorial](custom%20actors/index.md) - A WIP tutorial to make custom actors (not using decomp).
+
+[OoT64 Overview](oot64%20overview/index.md) - A WIP overview of how OoT64 works, focused on decomp.
 
 ## Contributing
 
