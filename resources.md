@@ -84,11 +84,19 @@ Find what makes a render task crash https://github.com/Thar0/gbd
 
 # Documentation
 
-OoT Camera Function LookUp Table (WIP) https://docs.google.com/spreadsheets/d/17Mz4wgodnNFjA4l5yzskEvP5-IUv9iqewRx9U9BiEtg/edit#gid=0
-
 A ton more links https://n64.dev/
 
 Image formats https://n64squid.com/homebrew/n64-sdk/textures/image-formats/
+
+OoT Camera Function LookUp Table (WIP) https://docs.google.com/spreadsheets/d/17Mz4wgodnNFjA4l5yzskEvP5-IUv9iqewRx9U9BiEtg/edit#gid=0
+
+OoT Gold Skulltulas flags https://docs.google.com/spreadsheets/d/13INyLIv1uy4bbrwh8k6NatfgH9xmpDC_x2kMX61Txnw/edit#gid=1537261161
+
+OoT Scene names internal/readable https://docs.google.com/spreadsheets/d/15C6AvkdLP7_8Gsy81FmRvZtxKBhyi5zW9e7F7hbLlo8/edit#gid=399798332
+
+OoT Player code documentation
+https://docs.google.com/spreadsheets/d/1W7QQFoaVz4cEWm-jfQUfN05QriI1YBLKZXL4qLXwOFk/edit#gid=306041905
+https://docs.google.com/spreadsheets/d/12RpxLB-AhiilGi6aG7MNKia2lhkAKivjly9V8GL-utg/edit?usp=sharing
 
 # N64 hardware and low level
 
