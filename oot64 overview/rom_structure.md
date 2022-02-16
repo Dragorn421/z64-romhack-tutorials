@@ -53,4 +53,4 @@ When building decomp, the `spec` is processed to a [linker script](https://sourc
 The ROM header provides information useful to the N64 when booting the ROM.
 In oot decomp it is located in [`asm/rom_header.s`](https://github.com/zeldaret/oot/blob/05b2cbfc60d396a7cf3b539347fc693d5588cada/asm/rom_header.s).
 
-One of your first edits may be to change the "Region" from `"P"` (Europe) to `"E"` (North America) ([En64 Wiki: ROM Header](http://en64.shoutwiki.com/wiki/ROM#Cartridge_ROM_Header)) to make the ROM "NTSC" instead of "PAL", so the ROM runs at 20fps instead of the decreased PAL framerate.
+One of your first edits may be to change the "Region" from `"P"` (Europe) to `"E"` (North America) ([En64 Wiki: ROM Header](http://en64.shoutwiki.com/wiki/ROM#Cartridge_ROM_Header), [Software Submissison Requirements (PAL)](http://n64devkit.square7.ch/info/submission/pal/01-01.html)) to make the ROM "NTSC" instead of "PAL", so the ROM runs at 20fps instead of the decreased PAL framerate.
