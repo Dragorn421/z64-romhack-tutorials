@@ -100,6 +100,8 @@ https://docs.google.com/spreadsheets/d/12RpxLB-AhiilGi6aG7MNKia2lhkAKivjly9V8GL-
 
 # N64 hardware and low level
 
+Incredibly good wiki, probably the most detailed with the best explanations https://n64brew.dev/wiki/Main_Page
+
 Thanks to Tharo for providing most of these links.
 
 Official SDK Online Manuals http://n64devkit.square7.ch/
@@ -119,6 +121,8 @@ Memory map, RCP registers http://en64.shoutwiki.com/wiki/Memory_map_detailed
 - http://ultra64.ca/files/documentation/online-manuals/functions_reference_manual_2.0i/os/osGlobals.html
 - http://en64.shoutwiki.com/wiki/N64_Memory#Boot_Strap
 
+N64 patent in the US (features a dmem vertex structure (for the f3d microcode?)) https://patentimages.storage.googleapis.com/46/94/02/b2012efd9f1ba8/US6239810.pdf
+
 ## Boot
 
 - http://n64devkit.square7.ch/pro-man/pro06/06-10.htm
@@ -132,12 +136,16 @@ Memory map, RCP registers http://en64.shoutwiki.com/wiki/Memory_map_detailed
 https://github.com/ttk2/mupen64plus/blob/master/wiki/SoftResetNotes.wiki
 https://github.com/ttk2/mupen64plus/blob/f527f64f7655cce885145b707a643f37bbb3be94/wiki/SoftResetNotes.wiki
 
+Full detailed sequence up to jumping to game code: https://n64brew.dev/wiki/PIF-NUS#Console_startup (permanent page url: https://n64brew.dev/w/index.php?title=PIF-NUS&oldid=4470 )
+
 ## RCP
 
 https://dragonminded.com/n64dev/Reality%20Coprocessor.pdf
 
 Official sgi document, it has some errors
 https://ultra64.ca/files/documentation/silicon-graphics/SGI_Nintendo_64_RSP_Programmers_Guide.pdf
+
+RDP Command Summary (sgi document) http://hcs64.com/files/RDP_COMMANDS.pdf
 
 Really good rsp doc made by the homebrew community
 https://github.com/rasky/r64emu/blob/master/doc/rsp.md
