@@ -32,7 +32,7 @@ For example the following code:
 GfxPrint printer;
 Gfx* gfx;
 
-OPEN_DISPS(globalCtx->state.gfxCtx, __FILE__, __LINE__);
+OPEN_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 
 gfx = POLY_OPA_DISP + 1;
 gSPDisplayList(OVERLAY_DISP++, gfx);
@@ -51,7 +51,7 @@ gSPEndDisplayList(gfx++);
 gSPBranchList(POLY_OPA_DISP, gfx);
 POLY_OPA_DISP = gfx;
 
-CLOSE_DISPS(globalCtx->state.gfxCtx, __FILE__, __LINE__);
+CLOSE_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 ```
 
 </details>
@@ -66,9 +66,9 @@ GfxPrint printer;
 Gfx* gfx;
 
 // OPEN_DISPS/CLOSE_DISPS is a macro providing access to the POLY_OPA_DISP and OVERLAY_DISP macro
-// (which would otherwise be equivalently accessed like `globalCtx->state.gfxCtx->polyOpa.p`/`...->overlay.p`)
+// (which would otherwise be equivalently accessed like `play->state.gfxCtx->polyOpa.p`/`...->overlay.p`)
 // the point is to make debugging easier in case the game crashes (see Tharo's GBD)
-OPEN_DISPS(globalCtx->state.gfxCtx, __FILE__, __LINE__);
+OPEN_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 
 // the dlist will be written in the opa buffer because that buffer is larger,
 // but executed from the overlay buffer (overlay draws last, for example the hud is drawn to overlay)
@@ -95,8 +95,10 @@ gSPEndDisplayList(gfx++);
 gSPBranchList(POLY_OPA_DISP, gfx);
 POLY_OPA_DISP = gfx;
 
-CLOSE_DISPS(globalCtx->state.gfxCtx, __FILE__, __LINE__);
+CLOSE_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 ```
+
+(note this assumes the current function has `PlayState* play` either as a variable or an argument, which is usually the case)
 
 </details>
 
@@ -106,7 +108,7 @@ This example code achieves:
 
 ![](https://cdn.discordapp.com/attachments/915273929369731173/924577222000508948/unknown.png)
 
-(code put at the end of `Gameplay_Draw` for this screenshot)
+(code put at the end of `Play_Draw` for this screenshot, with `PlayState* play = this;`)
 
 </details>
 
