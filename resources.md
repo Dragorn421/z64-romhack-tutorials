@@ -155,4 +155,6 @@ Angrylion, highly accurate video plugin https://github.com/ata4/angrylion-rdp-pl
 
 F3DEX2 disassembly https://github.com/Mr-Wiseguy/f3dex2
 
+Disassembly of microcodes used in OoT64 (aspMain (audio), gspS2DEX2d_fifo (s2dex), njpgdspMain (jpeg)): https://github.com/Thar0/oot/tree/rsp/rsp (permanent link to latest revision as of 2022-7-13: https://github.com/Thar0/oot/tree/b799db384447bf42b2f1b376a362c0e3b4234117/rsp )
+
 https://github.com/Thar0/binutils-rsp
