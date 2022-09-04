@@ -34,6 +34,12 @@ https://github.com/Dragorn421/oot/tree/mod_base_for_mods
 
 Basic/required changes that anyone would mostly want to mod decomp.
 
+#### example_add_actor
+
+https://github.com/Dragorn421/oot/tree/example_add_actor
+
+Example of adding a new actor in decomp.
+
 #### build_from_binary_assets
 
 https://github.com/Dragorn421/oot/tree/build_from_binary_assets
