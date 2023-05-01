@@ -4,9 +4,13 @@
 
 If you use Project64, you can use a set of scripts to view the game logs: https://github.com/Dragorn421/IS64-logging
 
-If you use mupen64plus, this is a built-in feature. In m64p (https://m64p.github.io/), you can open the relevant window in `Emulation` > `View Log`.
+If you use mupen64plus, this is a built-in feature.
 
-Feel free to tell me about other emulators
+In simple64 (https://simple64.github.io/), you can open the relevant window in `Emulation` > `View Log`.
+
+In ares (https://ares-emu.net/), it is a built-in feature. Logs are written to standard output (run the emulator from a terminal).
+
+Feel free to tell me about other emulators!
 
 ## Project64 Debugger
 
