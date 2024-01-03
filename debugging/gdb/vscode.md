@@ -237,3 +237,75 @@ List of classes of commands:
 To use gdb in z64 overlays such as most actors, see [GDB and z64 overlays](gdb_and_z64_overlays.md).
 
 Note: for running `source path/to/script.py` or `ovl ...` as explained in the linked document, don't forget to use `-exec` [as explained above](#running-gdb-commands). For example `-exec source path/to/script.py`.
+
+To automatically run the script when launching gdb in VS Code, add the following to your configuration in the `launch.json` (replacing `gdb_z64overlay_load_auto.py` with the proper path if needed):
+
+```json
+"postRemoteConnectCommands": [
+    {
+        "text": "source gdb_z64overlay_load_auto.py"
+    }
+],
+```
+
+The full `launch.json` may then look like:
+
+<details>
+
+<summary>On Windows</summary>
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GDB",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "Z:/path/to/oot/zelda_ocarina_mq_dbg.elf",
+            "cwd": "Z:/path/to/oot",
+            "MIMode": "gdb",
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb-multiarch.exe",
+            "miDebuggerServerAddress": "[::1]:9123",
+            "miDebuggerArgs": "-readnow",
+            "postRemoteConnectCommands": [
+                {
+                    "text": "source gdb_z64overlay_load_auto.py"
+                }
+            ],
+        }
+    ]
+}
+```
+
+</details>
+
+<details>
+
+<summary>On Linux</summary>
+
+```json
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "GDB",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/zelda_ocarina_mq_dbg.elf",
+            "cwd": "${workspaceFolder}",
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb-multiarch",
+            "miDebuggerServerAddress": "[::1]:9123",
+            "miDebuggerArgs": "-readnow",
+            "postRemoteConnectCommands": [
+                {
+                    "text": "source gdb_z64overlay_load_auto.py"
+                }
+            ],
+        }
+    ]
+}
+```
+
+</details>
