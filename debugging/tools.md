@@ -9,7 +9,7 @@ Project64 has a Javascript scripting API: https://htmlpreview.github.io/?https:/
 
 # ares gdb
 
-The ares emulator (https://ares-emu.net/) has gdb support, allowing powerful code debugging.
+The ares emulator (https://ares-emu.net/) has gdb support, allowing powerful code debugging. [For more details see gdb](gdb/index.md).
 
 # Graphics Binary Debugger
 
