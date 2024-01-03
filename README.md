@@ -6,6 +6,8 @@ A collection of tutorials and explanations, of various levels, for understanding
 
 [OoT64 Overview](oot64%20overview/index.md) - A WIP overview of how OoT64 works, focused on decomp.
 
+Everything in this repo is CC0-licensed ("public domain").
+
 ## Contributing
 
 [GitHub Flavoured Markdown cheatsheet](https://enterprise.github.com/downloads/en/markdown-cheatsheet.pdf)
