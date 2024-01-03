@@ -105,6 +105,42 @@ pad2 = <optimized out>
 
 For MIPS registers, use `info registers` and `info float`.
 
+## Evaluating expressions
+
+Use `print` to evaluate any expression, including function calls.
+
+For the following examples I have execution paused in `Play_Update(PlayState* this)`, allowing me to use `this` in the expressions to access the play state.
+
+For example `print this->pauseCtx.state` prints the pause state (0 when unpaused):
+
+```
+(gdb) print this->pauseCtx.state
+$10 = 0
+```
+
+For example `print Play_GetActiveCamId(this)` calls `Play_GetActiveCamId` and displays its result:
+
+```
+(gdb) print Play_GetActiveCamId(this)
+$12 = 1
+```
+
+`Play_GetActiveCamId` is a function without [side-effects](https://en.wikipedia.org/wiki/Side_effect_(computer_science)), meaning calling it does not change the state of the program. But gdb doesn't limit you to only calling these functions, despite the command being named `print`.
+
+For example `print Play_TriggerVoidOut(this)` will cause a void out:
+
+```
+(gdb) print Play_TriggerVoidOut(this)
+$17 = void
+```
+
+You can also assign to data or variables. For example setting the rupee count:
+
+```
+(gdb) print gSaveContext.save.info.playerData.rupees = 69
+$1 = 69
+```
+
 ## Breakpoints
 
 Use `b FUNCTION_NAME` to place a breakpoint on a function. When that function runs, execution will be paused automatically at the start of the function.

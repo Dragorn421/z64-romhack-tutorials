@@ -187,6 +187,35 @@ When the breakpoint is hit, execution is paused there:
 
 ![breakpoint hit in VS Code](media/vscode_breakpoint_hit.png)
 
+# Evaluating expressions
+
+You can evaluate any expression, including calling functions.
+
+One way is to add an expression to the list of watches in the side panel. Note these aren't live watches, they don't update while the game is running, they only update when the execution pauses.
+
+Another way is to use the debug console.
+
+The following screenshot demonstrates both options by evaluating `this->pauseCtx.state` and `Play_GetActiveCamId(this)` both ways. Note breaking on `Play_Update(PlayState* this)` allows to use `this` in the expressions.
+
+![evaluating expressions in vs code](media/vscode_evaluate_expressions.png)
+
+`Play_GetActiveCamId` is a function without [side-effects](https://en.wikipedia.org/wiki/Side_effect_(computer_science)), meaning calling it does not change the state of the program. But you are not limited to only calling these functions.
+
+For example evaluating `Play_TriggerVoidOut(this)` will cause a void out. Note you probably only want to make such calls in the debug console, and not in watches, so they aren't evaluated automatically every time the execution pauses.
+
+You can also assign to data or variables. For example setting the rupee count:
+
+```
+gSaveContext.save.info.playerData.rupees = 69
+```
+
+Here is what it looks like when an expression cannot be evaluated, for example evaluating `abc` in a context where no such symbol exists:
+
+```
+abc
+-var-create: unable to create variable object
+```
+
 # Running gdb commands
 
 You may need to run gdb commands in VS Code as if using the [terminal gdb client](terminal.md). You can do so in the Debug Console with `-exec gdbcommand`.
