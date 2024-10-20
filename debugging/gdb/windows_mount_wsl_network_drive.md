@@ -6,4 +6,4 @@ TODO: expand on the instructions and test. I copypasted them from HailToDodongo 
 
 In File Explorer, go to `This PC`, click `Map network drive`, select the label (`Z:` by default), and type in `\\wsl.localhost\<distribution>` [1], then you're set
 
-[1] the beginning of the path may differ from a computer to another. I have seen some posts online with `\\wsl.$\` instead
+[1] the beginning of the path may differ from a computer to another. I have seen some posts online with `\\wsl.$\` or `\\wsl$\` instead
