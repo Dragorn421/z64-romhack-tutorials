@@ -30,8 +30,12 @@ Feel free to tell me about other emulators!
 
 # Printing logs to console
 
-Logs are written with `osSyncPrintf`, which you can use too.
+Logs are written with `osSyncPrintf` / `PRINTF`, which you can use too. `PRINTF()` is a macro that expands to `osSyncPrintf()` in debug versions (if `DEBUG_FEATURES` is set to 1), and to nothing otherwise.
 
-For colored output, check out `include/terminal.h` (https://github.com/zeldaret/oot/blob/1f9c28f370d73268981fd8a42f9c6ac15b560a1a/include/terminal.h)
+For colored output, check out `include/terminal.h` (https://github.com/zeldaret/oot/blob/8a823a7ad24d25d5ebc390e7436e6859227a0ace/include/terminal.h)
 
-Look for `osSyncPrintf` usage in decomp for examples, it's pretty straightforward.
+Look for `PRINTF` usage in decomp for examples, it's pretty straightforward.
+
+# Printing logs in English
+
+The game prints most log messages in japanese. Decomp provides English translations (that are not part of the base roms) that you can enable in `include/translation.h` (https://github.com/zeldaret/oot/blob/8a823a7ad24d25d5ebc390e7436e6859227a0ace/include/translation.h) by changing `#define T(jp, en) jp` to `#define T(jp, en) en`.
