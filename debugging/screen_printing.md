@@ -6,8 +6,6 @@ you can print text on the screen.
 
 For example the following code:
 
-<details>
-
 ```c
 GfxPrint printer;
 Gfx* gfx;
@@ -34,7 +32,9 @@ POLY_OPA_DISP = gfx;
 CLOSE_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 ```
 
-</details>
+Note this assumes the current function has `PlayState* play` either as a variable or an argument, which is usually the case.
+
+Note you may need to add `#include`s: include `gfx.h` for `OPEN_DISPS`/`CLOSE_DISPS`, and `libu64/gfxprint.h` for the `GfxPrint` type and functions.
 
 This example code is explained in details here:
 
@@ -78,15 +78,13 @@ POLY_OPA_DISP = gfx;
 CLOSE_DISPS(play->state.gfxCtx, __FILE__, __LINE__);
 ```
 
-(note this assumes the current function has `PlayState* play` either as a variable or an argument, which is usually the case)
-
 </details>
 
 This example code achieves:
 
 <details>
 
-![](https://cdn.discordapp.com/attachments/915273929369731173/924577222000508948/unknown.png)
+![](media/gfxprint.png)
 
 (code put at the end of `Play_Draw` for this screenshot, with `PlayState* play = this;`)
 
