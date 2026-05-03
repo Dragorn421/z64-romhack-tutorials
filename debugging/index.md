@@ -1,4 +1,5 @@
 - [Viewing game logs / Console logging](console_logging.md)
 - [Printing text on screen](screen_printing.md)
 - [Debugging with GDB](gdb/index.md)
+- [Using the crash screen](crash_screen/index.md)
 - [Tools](tools.md)
