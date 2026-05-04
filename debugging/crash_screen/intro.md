@@ -47,9 +47,42 @@ It also shows the exception cause. The most common causes are:
 
 - TLB exception on load
 - TLB exception on store
-    - Since OoT does not use the TLB, these two usually mean a garbage pointer was dereferenced on a read/write operation respectively, for example a `NULL` access.
+    - Since OoT does not use the TLB, these two usually mean a garbage pointer was dereferenced on a read/write operation respectively, for example a `NULL` access. The attempted address (e.g. 0 for a `NULL` access) can be found in the VA register.
 - Floating point exception
     - This happens when some floating point operation fails (an operation involving `float` or `double` types, basically). In that case, the specific floating point exception cause will be shown on the "FPCSR" line.
+
+<details>
+
+<summary>More details on exception causes (courtesy of Tharo)</summary>
+
+TLB Miss : Address is not mapped, sets badvaddr (VA on thread context screen) to attempted address, if it's 0 it was a NULL dereference attempt
+
+Address Error : Address is not aligned, sets badvaddr (VA on thread context screen) to attempted address
+
+Floating Point Exception : Several types
+- Inexact - Disabled, won't be raised
+- Overflow - Disabled, won't be raised
+- Underflow - Disabled, won't be raised
+- Division by 0 - Disabled, won't be raised
+- Invalid Operation - Enabled, happens due to any of
+  - Indeterminate forms
+     - Add/subtract infinities against infinities
+     - Multiply 0s and infinities
+     - Divide 0/0 or inf/inf
+  - Domain errors
+     - Square root of negatives
+  - NaN moments
+     - Signaling comparisons involving NaN
+     - Arithmetic when one or both is sNaN
+     - Compare/convert to float when sNaN
+ - Unimplemented Operation - Enabled, happens due to any of
+   - Reserved or invalid format floating-point instructions, executing garbage
+   - Denormalized inputs, usually from loading a non-float from memory
+   - qNaN inputs
+
+Reserved Instruction / Coprocessor Unusable : CPU tried to execute garbage
+
+</details>
 
 The rest of the screen shows the values of the registers at the point of the crash. The lower half shows the floating point registers.
 
