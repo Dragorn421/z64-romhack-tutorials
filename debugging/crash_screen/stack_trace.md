@@ -63,6 +63,8 @@ mips-linux-gnu-objdump -drS build/gc-eu-mq-dbg/src/code/z_play.o > z_play_disas.
 
 Note the offsets are relative to the start of the file, and not relative to the start of each function.
 
+Note that instead of `--disassemble` or `-d` which will cause `objdump` to disassemble the whole file, you can also use `--disassemble=Play_Update` to disassemble just the single function of interest.
+
 Locate the Play_Update function: 
 
 ```c
