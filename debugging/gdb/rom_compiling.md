@@ -10,7 +10,31 @@ gdb can also be used without any kind of debug information, but it's a poor expe
 
 IDO, the original compiler used to build a matching rom, generates debug information that can in theory be understood by GDB (in a special section of the elf known as `.mdebug`)
 
-Unfortunately it seems that the linker ld messes up this debugging information when linking the .o object files into the elf file. This results in gdb crashing when reading debug information for an IDO-built elf.
+Unfortunately an unmodified gdb crashes when reading mdebug information from an oot rom elf. There are two ways to address this: either use a modified fixed gdb, or work around it by stripping off the mdebug information.
+
+## A fix: using a fixed gdb
+
+Build gdb from this source:
+
+https://github.com/Dragorn421/binutils-gdb/tree/binutils-2_42-mdebugfix
+
+The fix was made by zZeck, for details see the following messages on the zeldaret discord: https://discord.com/channels/688807550715560050/688850564595187788/1237088467054493808
+
+Partial instructions (Ubuntu Linux):
+
+```sh
+# There are more dependencies than just this but I don't quite know the exact list. Contributions welcome!
+apt install libexpat1-dev
+git clone --depth 1 --branch binutils-2_42-mdebugfix git@github.com:Dragorn421/binutils-gdb.git binutils-gdb
+mkdir build
+cd build
+# Note: you may want to use mips64-elf instead of mips-linux-gnu, I'm not sure. Personally I use mips-linux-gnu-gdb without issues.
+../binutils-gdb/configure --target mips-linux-gnu --with-python --with-expat
+make all-gdb
+sudo install-gdb
+```
+
+## A workaround: stripping mdebug
 
 A workaround is to strip the `.mdebug` section from the elf and load the resulting elf into gdb. The debug information will be limited, but at least there will be function names:
 
