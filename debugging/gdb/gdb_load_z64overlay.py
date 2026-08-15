@@ -325,6 +325,16 @@ class BreakpointKaleidoFree(gdb.Breakpoint):
         return False
 
 
+# the overlays that are ACTOROVL_ALLOC_PERSISTENT are never freed
+# the memory is only freed as a whole when ZeldaArena_Cleanup is called near the end of the play state
+class BreakpointZeldaArenaCleanup(gdb.Breakpoint):
+    def stop(self):
+        # TODO ideally should track which overlays are spawned persistently and only unload those
+        for addr in tuple(loaded_z64overlay_objects.keys()):
+            unload_z64overlay_object(addr)
+        return False
+
+
 bp_load = BreakpointOverlayLoad("Overlay_Load")
 bp_load.silent = True
 bp_load.enabled = AUTOLOAD_ENABLED_BY_DEFAULT
@@ -337,3 +347,6 @@ bp_system_free.silent = True
 
 bp_kaleido = BreakpointKaleidoFree("KaleidoManager_ClearOvl")
 bp_kaleido.silent = True
+
+bp_zelda_arena_cleanup = BreakpointZeldaArenaCleanup("ZeldaArena_Cleanup")
+bp_zelda_arena_cleanup.silent = True
