@@ -17,8 +17,11 @@ import re
 
 import gdb
 
-
 AUTOLOAD_ENABLED_BY_DEFAULT = False
+
+# Workarounds for making the script work under mdebug such as when using the IDO compiler.
+# This assumes a matching build!
+MDEBUG_WORKAROUNDS = False
 
 
 TYPE_U32 = gdb.lookup_type("u32")
@@ -266,8 +269,17 @@ class BreakpointOverlayLoad(gdb.Breakpoint):
     def stop(self):
         frame = gdb.selected_frame()
 
-        alloc_address = int(frame.read_var("allocatedRamAddr").cast(TYPE_U32))
-        vram_address = int(frame.read_var("vramStart").cast(TYPE_U32))
+        try:
+            alloc_address = int(frame.read_var("allocatedRamAddr").cast(TYPE_U32))
+            vram_address = int(frame.read_var("vramStart").cast(TYPE_U32))
+        except:
+            if MDEBUG_WORKAROUNDS:
+                alloc_address = int(
+                    gdb.parse_and_eval("*(void**)($sp-0x50+0x60)").cast(TYPE_U32)
+                )
+                vram_address = int(frame.read_register("a2").cast(TYPE_U32))
+            else:
+                raise
 
         load_z64overlay_object(alloc_address, vram_address)
 
@@ -277,10 +289,16 @@ class BreakpointOverlayLoad(gdb.Breakpoint):
 class BreakpointFree(gdb.Breakpoint):
     def stop(self):
         frame = gdb.selected_frame()
-        # The following error
-        # ValueError: Variable 'ptr' not found.
-        # means the Free function was not compiled with debug flags (e.g. -Og -g)
-        ptr = int(frame.read_var("ptr").cast(TYPE_U32))
+        try:
+            # The following error
+            # ValueError: Variable 'ptr' not found.
+            # means the Free function was not compiled with debug flags (e.g. -Og -g)
+            ptr = int(frame.read_var("ptr").cast(TYPE_U32))
+        except:
+            if MDEBUG_WORKAROUNDS:
+                ptr = int(frame.read_register("a0").cast(TYPE_U32))
+            else:
+                raise
         unload_z64overlay_object(ptr)
         return False
 
@@ -288,7 +306,13 @@ class BreakpointFree(gdb.Breakpoint):
 class BreakpointKaleidoFree(gdb.Breakpoint):
     def stop(self):
         frame = gdb.selected_frame()
-        ptr = int(frame.read_var("ovl")["loadedRamAddr"].cast(TYPE_U32))
+        try:
+            ptr = int(frame.read_var("ovl")["loadedRamAddr"].cast(TYPE_U32))
+        except:
+            if MDEBUG_WORKAROUNDS:
+                ptr = int(gdb.parse_and_eval("*(void**)$a0").cast(TYPE_U32))
+            else:
+                raise
         unload_z64overlay_object(ptr)
         return False
 
