@@ -169,16 +169,24 @@ def load_z64overlay_object(alloc_address: int, vram_address: int):
         0
     ].symtab.filename
     rom_elf_filename = gdb.current_progspace().filename
-    target_filename_o_p = (
-        Path(rom_elf_filename).parent / target_filename_c
-    ).with_suffix(".o")
+    target_filename_plf_p = (
+        Path(rom_elf_filename).parent
+        / "segments"
+        / (Path(target_filename_c).parent.name + ".plf")
+    )
+    target_filename_elf_p = target_filename_plf_p
+    if not target_filename_plf_p.exists():
+        target_filename_o_p = (
+            Path(rom_elf_filename).parent / target_filename_c
+        ).with_suffix(".o")
+        target_filename_elf_p = target_filename_o_p
 
-    loaded_z64overlay_objects[alloc_address] = target_filename_o_p
-    print("Reading " + target_filename_o_p.stem + "...")
+    loaded_z64overlay_objects[alloc_address] = target_filename_elf_p
+    print("Reading " + target_filename_elf_p.name + "...")
 
     gdb.execute(
         "add-symbol-file -readnow "
-        + str(target_filename_o_p)
+        + str(target_filename_elf_p)
         + " -o 0xFF000000"
         + "".join(
             f" -s {sec.section_name} {ovl_offsets[sec]:#x}" for sec in SectionType
