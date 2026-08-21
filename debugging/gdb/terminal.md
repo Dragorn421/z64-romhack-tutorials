@@ -10,14 +10,16 @@ See [Install gdb-multiarch](install_gdb_multiarch.md).
 
 # Connect to the gdb server
 
+In the following, replace `VERSION` in paths with the game version you are working with. For example if working with ntsc-1.0, `build/VERSION/oot-VERSION.elf` -> `build/ntsc-1.0/oot-ntsc-1.0.elf`.
+
 Run gdb-multiarch, passing it the elf file of the rom if you want (recommended, see [Compiling the ROM](rom_compiling.md))
 
-If using WSL: your elf file is most likely in the WSL filesystem, but you're running gdb-multiarch in Windows. See [Windows: WSL filesystem drive](windows_mount_wsl_network_drive.md) to mount the WSL filesystem as a `Z:` drive you can then use to access the WSL filesystem. For example you may end up running `gdb-multiarch Z:/home/yourusername/oot/zelda_ocarina_mq_dbg.elf`.
+If using WSL: your elf file is most likely in the WSL filesystem, but you're running gdb-multiarch in Windows. See [Windows: WSL filesystem drive](windows_mount_wsl_network_drive.md) to mount the WSL filesystem as a `Z:` drive you can then use to access the WSL filesystem. For example you may end up running `gdb-multiarch Z:/home/yourusername/oot/build/VERSION/oot-VERSION.elf`.
 
 You should see something like:
 
 ```
-dragorn421@dragorn421pc:~/Documents/oot$ gdb-multiarch zelda_ocarina_mq_dbg.elf 
+dragorn421@dragorn421pc:~/Documents/oot$ gdb-multiarch build/VERSION/oot-VERSION.elf 
 GNU gdb (Ubuntu 14.0.50.20230907-0ubuntu1) 14.0.50.20230907-git
 Copyright (C) 2023 Free Software Foundation, Inc.
 License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
@@ -33,7 +35,7 @@ Find the GDB manual and other documentation resources online at:
 
 For help, type "help".
 Type "apropos word" to search for commands related to "word"...
-Reading symbols from zelda_ocarina_mq_dbg.elf...
+Reading symbols from build/VERSION/oot-VERSION.elf...
 (gdb) 
 ```
 
@@ -52,9 +54,9 @@ Remote debugging using [::1]:9123
 
 The line `0x80006c4c in __osViInit ()` will probably be different for you and every time you connect. It indicates the location of the code the execution is currently at.
 
-Note: you can pass `-ex 'COMMAND'` arguments to `gdb-multiarch` to execute commands. For example `gdb-multiarch zelda_ocarina_mq_dbg.elf -ex 'target remote [::1]:9123'` will run `target remote [::1]:9123`.
+Note: you can pass `-ex 'COMMAND'` arguments to `gdb-multiarch` to execute commands. For example `gdb-multiarch build/VERSION/oot-VERSION.elf -ex 'target remote [::1]:9123'` will run `target remote [::1]:9123`.
 
-Note: you may have a better experience telling gdb to parse the debug information all at once on startup using the `-readnow` flag (for example `gdb-multiarch zelda_ocarina_mq_dbg.elf -readnow`). However it delays startup.
+Note: you may have a better experience telling gdb to parse the debug information all at once on startup using the `-readnow` flag (for example `gdb-multiarch build/VERSION/oot-VERSION.elf -readnow`). However it delays startup.
 
 # Basic commands
 

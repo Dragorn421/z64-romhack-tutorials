@@ -46,6 +46,8 @@ You can also open a C file, go to the "Run and Debug" tab, and click "create a l
 
 The configuration we want to add to `launch.json` depends on whether you're using [Windows](#windows-launchjson) or [Linux](#linux-launchjson).
 
+In the following, replace `VERSION` in paths with the game version you are working with. For example if working with ntsc-1.0, `build/VERSION/oot-VERSION.elf` -> `build/ntsc-1.0/oot-ntsc-1.0.elf`.
+
 ## Windows `launch.json`
 
 Add the following configuration, replacing both `Z:/path/to/oot` with your own (for example it may be `Z:/home/YOURUSERNAME/oot`).
@@ -57,7 +59,7 @@ Also change the `gdb-multiarch.exe` path if you installed it elsewhere, as well 
     "name": "GDB",
     "type": "cppdbg",
     "request": "launch",
-    "program": "Z:/path/to/oot/zelda_ocarina_mq_dbg.elf",
+    "program": "Z:/path/to/oot/build/VERSION/oot-VERSION.elf",
     "cwd": "Z:/path/to/oot",
     "MIMode": "gdb",
     "miDebuggerPath": "C:/msys64/mingw64/bin/gdb-multiarch.exe",
@@ -76,7 +78,7 @@ The full `launch.json` may look like:
             "name": "GDB",
             "type": "cppdbg",
             "request": "launch",
-            "program": "Z:/path/to/oot/zelda_ocarina_mq_dbg.elf",
+            "program": "Z:/path/to/oot/build/VERSION/oot-VERSION.elf",
             "cwd": "Z:/path/to/oot",
             "MIMode": "gdb",
             "miDebuggerPath": "C:/msys64/mingw64/bin/gdb-multiarch.exe",
@@ -96,7 +98,7 @@ Add the following configuration:
     "name": "GDB",
     "type": "cppdbg",
     "request": "launch",
-    "program": "${workspaceFolder}/zelda_ocarina_mq_dbg.elf",
+    "program": "${workspaceFolder}/build/VERSION/oot-VERSION.elf",
     "cwd": "${workspaceFolder}",
     "MIMode": "gdb",
     "miDebuggerPath": "gdb-multiarch",
@@ -115,7 +117,7 @@ The full `launch.json` may look like:
             "name": "GDB",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/zelda_ocarina_mq_dbg.elf",
+            "program": "${workspaceFolder}/build/VERSION/oot-VERSION.elf",
             "cwd": "${workspaceFolder}",
             "MIMode": "gdb",
             "miDebuggerPath": "gdb-multiarch",
@@ -262,7 +264,7 @@ The full `launch.json` may then look like:
             "name": "GDB",
             "type": "cppdbg",
             "request": "launch",
-            "program": "Z:/path/to/oot/zelda_ocarina_mq_dbg.elf",
+            "program": "Z:/path/to/oot/build/VERSION/oot-VERSION.elf",
             "cwd": "Z:/path/to/oot",
             "MIMode": "gdb",
             "miDebuggerPath": "C:/msys64/mingw64/bin/gdb-multiarch.exe",
@@ -292,7 +294,7 @@ The full `launch.json` may then look like:
             "name": "GDB",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/zelda_ocarina_mq_dbg.elf",
+            "program": "${workspaceFolder}/build/VERSION/oot-VERSION.elf",
             "cwd": "${workspaceFolder}",
             "MIMode": "gdb",
             "miDebuggerPath": "gdb-multiarch",

@@ -39,11 +39,11 @@ sudo install-gdb
 A workaround is to strip the `.mdebug` section from the elf and load the resulting elf into gdb. The debug information will be limited, but at least there will be function names:
 
 ```sh
-# Remove .mdebug section from zelda_ocarina_mq_dbg.elf and write resulting elf to zelda_ocarina_mq_dbg_NOMDEBUG.elf
-mips-linux-gnu-objcopy --remove-section=.mdebug zelda_ocarina_mq_dbg.elf zelda_ocarina_mq_dbg_NOMDEBUG.elf
+# Remove .mdebug section from oot-VERSION.elf and write resulting elf to oot-VERSION_NOMDEBUG.elf
+/path/to/mips64-elf-objcopy --remove-section=.mdebug build/VERSION/oot-VERSION.elf build/VERSION/oot-VERSION_NOMDEBUG.elf
 
 # This may print scary warnings like
-# "mips-linux-gnu-objcopy: zelda_ocarina_mq_dbg_NOMDEBUG.elf: section `..Audiobank' can't be allocated in segment 2",
+# "/path/to/mips64-elf-objcopy: build/VERSION/oot-VERSION_NOMDEBUG.elf: section ..Audioseq.bss lma 0x79470 adjusted to 0x4d9f40",
 # afaict it seems fine to ignore them
 ```
 
