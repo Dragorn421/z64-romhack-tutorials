@@ -185,9 +185,12 @@ def load_z64overlay_object(alloc_address: int, vram_address: int):
     print("Reading " + target_filename_elf_p.name + "...")
 
     gdb.execute(
-        "add-symbol-file -readnow "
-        + str(target_filename_elf_p)
-        + " -o 0xFF000000"
+        f"add-symbol-file -readnow {target_filename_elf_p}"
+        # We want to use -o to "move out of the way" the sections not listed
+        # by -s that aren't actually linked nor loaded
+        # (i.e. the .MIPS.abiflags section),
+        # but -o with -s is buggy: https://sourceware.org/pipermail/binutils/2026-September/151167.html
+        # + " -o 0xFF000000"
         + "".join(
             f" -s {sec.section_name} {ovl_offsets[sec]:#x}" for sec in SectionType
         ),
